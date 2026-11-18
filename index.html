@@ -117,6 +117,11 @@ header.nav{
 
 /* ---------- section shell ---------- */
 section{padding-block:clamp(64px,9vw,140px)}
+/* hairline between content sections, inset to the page gutter like the footer rule */
+#about,#speakers,#program,#partners{position:relative}
+#about::before,#speakers::before,#program::before,#partners::before{
+  content:"";position:absolute;top:0;left:var(--pad);right:var(--pad);border-top:1px solid var(--line);
+}
 .statement{
   font-size:clamp(24px,2.7vw,52px);font-weight:600;letter-spacing:-.035em;line-height:1.06;
   max-width:19ch;
@@ -204,7 +209,6 @@ section{padding-block:clamp(64px,9vw,140px)}
 
 
 /* ---------- speakers ---------- */
-.speaker-list{border-top:1px solid var(--line)}
 .spk{
   display:grid;grid-template-columns:56px 1.05fr 1.5fr 140px 30px;
   gap:20px;align-items:center;
@@ -280,7 +284,30 @@ footer{padding:56px var(--pad) 30px}
 /* reveal */
 .rv{opacity:0;transform:translateY(18px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .rv.in{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}}
+/* speakers and partners are not confirmed yet: keep the layout, veil the content
+   behind a blur and a slow holographic sheen so it can't be read */
+.veiled{position:relative;pointer-events:none;user-select:none;-webkit-user-select:none}
+.veiled > *{filter:blur(9px) saturate(.8);opacity:.8}
+.veiled::after{
+  content:"";position:absolute;inset:-6px;pointer-events:none;
+  background:linear-gradient(90deg,
+    rgba(248,206,69,.28),rgba(242,103,34,.24),rgba(232,72,31,.24),
+    rgba(242,103,34,.24),rgba(248,206,69,.28));
+  background-size:300% 100%;mix-blend-mode:multiply;
+  /* feather all four edges so the sheen fades out instead of ending on a hard box */
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 64px,#000 calc(100% - 64px),transparent),
+                     linear-gradient(180deg,transparent,#000 40px,#000 calc(100% - 40px),transparent);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(90deg,transparent,#000 64px,#000 calc(100% - 64px),transparent),
+             linear-gradient(180deg,transparent,#000 40px,#000 calc(100% - 40px),transparent);
+  mask-composite:intersect;
+  animation:holo 9s linear infinite;
+}
+/* keep the group's hairlines crisp: the sheen sits inside them */
+.plgroup.veiled::after{inset:10px 0}
+@keyframes holo{to{background-position:300% 0}}
+
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}.veiled::after{animation:none}}
 </style>
 </head>
 <body>
@@ -330,7 +357,6 @@ footer{padding:56px var(--pad) 30px}
   </p>
 
   <div class="bigline rv">
-    <span class="eyebrow" data-en="The theme of 2027" data-ko="2027년의 주제">The theme of 2027</span>
     <p data-en="Humanity <i>:</i> Love &amp; Excellence" data-ko="Humanity <i>:</i> Love &amp; Excellence">Humanity <i>:</i> Love &amp; Excellence</p>
     <span class="sub" data-en="“Affair with Heart, Designing What Matters.” The future should begin with human life, be shaped by human judgment, and serve human possibility."
           data-ko="“Affair with Heart, Designing What Matters.” 미래는 인간의 삶에서 시작해, 인간의 판단으로 형성되고, 인간의 가능성에 봉사해야 합니다.">“Affair with Heart, Designing What Matters.”</span>
@@ -355,7 +381,7 @@ footer{padding:56px var(--pad) 30px}
 <!-- ================= SPEAKERS ================= -->
 <section id="speakers" class="wrap">
 
-  <div class="speaker-list" id="speakerList"></div>
+  <div class="speaker-list veiled" id="speakerList" aria-hidden="true"></div>
 
   <div style="margin-top:26px" class="rv">
     <a href="#" class="pill ghost" data-en="Full lineup to be announced →" data-ko="전체 라인업 추후 공개 →">Full lineup to be announced →</a>
@@ -407,22 +433,22 @@ footer{padding:56px var(--pad) 30px}
      Their participation stands as a shared belief in the power of inquiry.
   </p>
 
-  <div class="plgroup rv">
+  <div class="plgroup rv veiled" aria-hidden="true">
     <h3 data-en="Hosted by" data-ko="주최">Hosted by</h3>
     <div class="plogos" data-logos="kfda:KFDA|seoul-metropolitan-government:Seoul Metropolitan Government"></div>
   </div>
 
-  <div class="plgroup rv">
+  <div class="plgroup rv veiled" aria-hidden="true">
     <h3 data-en="Organized by" data-ko="주관">Organized by</h3>
     <div class="plogos" data-logos="why:WHY|seoul-metropolitan-government:Seoul Metropolitan Government|seoul-design-foundation:Seoul Design Foundation"></div>
   </div>
 
-  <div class="plgroup rv">
+  <div class="plgroup rv veiled" aria-hidden="true">
     <h3 data-en="Sponsored by" data-ko="후원">Sponsored by</h3>
     <div class="plogos" data-logos="genesis:Genesis|duobo:DUOBO by LG Labs"></div>
   </div>
 
-  <div class="plgroup rv">
+  <div class="plgroup rv veiled" aria-hidden="true">
     <h3 data-en="Featuring contributions from" data-ko="기여">Featuring contributions from</h3>
     <div class="plogos" data-logos="undp:UNDP|clab:CLAB|hongik-university:Hongik University|hongik-idas:Hongik IDAS"></div>
   </div>
