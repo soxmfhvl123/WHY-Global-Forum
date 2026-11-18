@@ -87,14 +87,16 @@ header.nav{
   text-transform:uppercase;
 }
 .hero-title .l1,
-.hero-title .l2{display:block;white-space:nowrap}
+.hero-title .l2{display:block}
+/* the second line may break on narrow phones rather than run off-screen */
+.hero-title .l2{white-space:normal;text-wrap:balance}
 .hero-meta{
   display:flex;justify-content:space-between;align-items:flex-end;gap:24px;
   margin-top:26px;flex-wrap:wrap;
 }
 .hero-meta p{max-width:38ch;font-size:14px;line-height:1.5;color:var(--ink-60)}
 /* sits just under the logo; the nav bar ends at 50px, so stay clear of it to keep the pills clickable */
-.hero-tag{position:absolute;top:54px;left:var(--pad);display:flex;gap:8px;flex-wrap:wrap;z-index:10}
+.hero-tag{position:absolute;top:54px;left:var(--pad);right:var(--pad);display:flex;gap:8px;flex-wrap:wrap;z-index:10}
 .year-pill{border:none;cursor:pointer}
 .year-pill.on{background:var(--ink);color:#fff;box-shadow:none}
 .meta-pill{
@@ -102,6 +104,8 @@ header.nav{
   transition:opacity .4s var(--ease),transform .4s var(--ease);
 }
 .meta-pill.show{opacity:1;transform:none;pointer-events:auto}
+/* long venue text wraps inside its pill instead of running past the screen edge */
+.meta-pill{white-space:normal;line-height:1.3;max-width:100%}
 
 /* floating labels over 3d */
 .tag3d{
