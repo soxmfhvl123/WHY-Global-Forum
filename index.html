@@ -92,7 +92,8 @@ header.nav{
   margin-top:26px;flex-wrap:wrap;
 }
 .hero-meta p{max-width:38ch;font-size:14px;line-height:1.5;color:var(--ink-60)}
-.hero-tag{position:absolute;top:calc(var(--pad) + 56px);left:var(--pad);display:flex;gap:8px;flex-wrap:wrap;z-index:10}
+/* sits just under the logo; the nav bar ends at 50px, so stay clear of it to keep the pills clickable */
+.hero-tag{position:absolute;top:54px;left:var(--pad);display:flex;gap:8px;flex-wrap:wrap;z-index:10}
 .year-pill{border:none;cursor:pointer}
 .year-pill.on{background:var(--ink);color:#fff;box-shadow:none}
 .meta-pill{
@@ -115,12 +116,14 @@ header.nav{
 
 /* ---------- section shell ---------- */
 section{padding-block:clamp(64px,9vw,140px)}
-.sec-head{display:flex;gap:20px;align-items:baseline;justify-content:space-between;margin-bottom:clamp(28px,4vw,56px);flex-wrap:wrap}
 .statement{
   font-size:clamp(26px,4.4vw,62px);font-weight:600;letter-spacing:-.035em;line-height:1.06;
   max-width:19ch;
 }
 .statement em{font-style:normal;color:var(--ink-30)}
+/* About opener: one oversized question, a mid-size answer, then the small body */
+.ask{font-size:clamp(40px,7.6vw,132px);font-weight:700;letter-spacing:-.045em;line-height:.98}
+.ask-mid{font-size:clamp(22px,2.8vw,40px);font-weight:600;letter-spacing:-.03em;line-height:1.15;margin-top:clamp(18px,2.4vw,32px)}
 .statement-sub{
   font-size:clamp(15px,1.5vw,19px);line-height:1.55;color:var(--ink-60);
   max-width:56ch;margin-top:20px;
@@ -298,9 +301,9 @@ footer{padding:56px var(--pad) 30px}
   <div id="tags"></div>
   <div class="hero-tag">
     <a class="pill ghost year-pill" href="2025/">2025</a>
-    <button class="pill ghost year-pill" id="pill2027" type="button">2027</button>
-    <span class="pill ghost meta-pill" id="metaDate" data-en="Jan 2027 · Hyundai Motor Group Yangjae HQ, Seoul" data-ko="2027년 1월 · 현대자동차그룹 양재사옥, 서울">Jan 2027 · Hyundai Motor Group Yangjae HQ, Seoul</span>
-    <span class="pill ghost meta-pill" id="metaTheme" data-en="Humanity : Love &amp; Excellence" data-ko="Humanity : Love &amp; Excellence">Humanity : Love &amp; Excellence</span>
+    <button class="pill ghost year-pill on" id="pill2027" type="button">2027</button>
+    <span class="pill ghost meta-pill show" id="metaDate" data-en="Jan 2027 · Hyundai Motor Group Headquarters (Yangjae), Seoul" data-ko="2027년 1월 · 현대자동차그룹 양재 본사, 서울">Jan 2027 · Hyundai Motor Group Headquarters (Yangjae), Seoul</span>
+    <span class="pill ghost meta-pill show" id="metaTheme" data-en="Humanity : Love &amp; Excellence" data-ko="Humanity : Love &amp; Excellence">Humanity : Love &amp; Excellence</span>
   </div>
   <div class="hero-ui">
     <h1 class="hero-title"
@@ -316,20 +319,13 @@ footer{padding:56px var(--pad) 30px}
 
 <!-- ================= ABOUT ================= -->
 <section id="about" class="wrap">
-  <div class="sec-head rv">
-    <span class="eyebrow" data-en="01 — From HOW to WHY" data-ko="01 — HOW에서 WHY로">01 — From HOW to WHY</span>
-    <span class="eyebrow" data-en="Of Humanity · By Humanity · For Humanity" data-ko="인간의 · 인간에 의한 · 인간을 위한">Of Humanity · By Humanity · For Humanity</span>
-  </div>
 
-  <h2 class="statement rv"
-      data-en="AI gives us powerful tools. Now we need a clear purpose — <em>who these tools serve, what values guide them, and how they make real life better.</em>"
-      data-ko="AI는 강력한 도구를 줍니다. 이제 필요한 것은 분명한 목적입니다 — <em>이 도구가 누구를 위한 것인지, 어떤 가치가 그것을 이끄는지, 그리고 어떻게 삶을 더 낫게 만드는지.</em>">
-      AI gives us powerful tools. Now we need a clear purpose.
-  </h2>
+  <h2 class="ask rv" data-en="What do you stand for?" data-ko="당신이 지키는 가치는 무엇입니까?">What do you stand for?</h2>
+  <p class="ask-mid rv" data-en="What we value shapes what we create." data-ko="우리가 소중히 여기는 것이 우리가 만드는 것을 결정합니다.">What we value shapes what we create.</p>
   <p class="statement-sub rv"
-     data-en="In 2026, 88% of surveyed organizations reported using AI in at least one business function, and generative AI reached 53% population adoption within three years — faster than the personal computer. As capability expands, human-centered thinking becomes even more essential."
-     data-ko="2026년 조사 대상 기업의 88%가 최소 하나의 업무 영역에서 AI를 사용한다고 답했고, 생성형 AI는 3년 만에 인구 대비 53%에 도달했습니다 — 개인용 컴퓨터보다 빠른 속도입니다. 역량이 확장될수록 인간 중심의 사고는 더욱 절실해집니다.">
-     Capability is expanding faster than ever.
+     data-en="WHY is a global forum where people from different fields and cultures explore how design and leadership can make life better. Through dialogue and shared learning, we find ways to put our values into practice."
+     data-ko="WHY는 서로 다른 분야와 문화의 사람들이 모여 디자인과 리더십이 어떻게 삶을 더 낫게 만들 수 있는지 탐구하는 글로벌 포럼입니다. 대화와 함께 배우는 과정을 통해, 우리의 가치를 실천으로 옮기는 길을 찾습니다.">
+     WHY is a global forum where people from different fields and cultures explore how design and leadership can make life better. Through dialogue and shared learning, we find ways to put our values into practice.
   </p>
 
   <div class="bigline rv">
@@ -357,10 +353,6 @@ footer{padding:56px var(--pad) 30px}
 
 <!-- ================= SPEAKERS ================= -->
 <section id="speakers" class="wrap">
-  <div class="sec-head rv">
-    <span class="eyebrow" data-en="02 — Who is speaking" data-ko="02 — 연사 라인업">02 — Who is speaking</span>
-    <span class="eyebrow" data-en="First 8 announced" data-ko="1차 8인 공개">First 8 announced</span>
-  </div>
 
   <div class="speaker-list" id="speakerList"></div>
 
@@ -371,10 +363,6 @@ footer{padding:56px var(--pad) 30px}
 
 <!-- ================= PROGRAM ================= -->
 <section id="program" class="wrap">
-  <div class="sec-head rv">
-    <span class="eyebrow" data-en="03 — Program" data-ko="03 — 프로그램">03 — Program</span>
-    <span class="eyebrow" data-en="January 2027 · One day" data-ko="2027년 1월 · 하루">January 2027 · One day</span>
-  </div>
 
   <div class="sessions">
     <div class="sess rv">
@@ -406,10 +394,6 @@ footer{padding:56px var(--pad) 30px}
 
 <!-- ================= PARTNERS ================= -->
 <section id="partners" class="wrap">
-  <div class="sec-head rv">
-    <span class="eyebrow" data-en="04 — Co-Creators" data-ko="04 — 공동 창작자">04 — Co-Creators</span>
-    <span class="eyebrow" data-en="WHY : 2027" data-ko="WHY : 2027">WHY : 2027</span>
-  </div>
 
   <h2 class="statement rv"
       data-en="Our partners are committed collaborators, sharing a design-driven mindset and working toward meaningful impact."
@@ -461,8 +445,8 @@ footer{padding:56px var(--pad) 30px}
   <div class="fgrid">
     <div class="fcol">
       <strong data-en="Venue" data-ko="장소">Venue</strong>
-      <span data-en="Hyundai Motor Group" data-ko="현대자동차그룹">Hyundai Motor Group</span>
-      <span data-en="Yangjae Headquarters, 1F · Seoul" data-ko="양재사옥 1층 · 서울">Yangjae Headquarters, 1F · Seoul</span>
+      <span data-en="Hyundai Motor Group Headquarters (Yangjae)" data-ko="현대자동차그룹 양재 본사">Hyundai Motor Group Headquarters (Yangjae)</span>
+      <span data-en="12, Heolleung-ro, Seocho-gu, Seoul, Republic of Korea" data-ko="서울특별시 서초구 헌릉로 12">12, Heolleung-ro, Seocho-gu, Seoul, Republic of Korea</span>
       <span data-en="Where technology, people, and conversation meet." data-ko="기술과 사람, 그리고 대화가 만나는 곳.">Where technology, people, and conversation meet.</span>
     </div>
     <div class="fcol">
@@ -611,7 +595,7 @@ document.querySelectorAll('.plogos').forEach(box=>{
 });
 
 /* =========================================================
-   YEAR PILLS — 2025 opens the archived 2025 site; 2027 reveals the date/theme pills
+   YEAR PILLS — 2025 opens the archived 2025 site; 2027 is selected by default (date/theme pills shown)
    ========================================================= */
 (function(){
   const p27 = document.getElementById('pill2027');
