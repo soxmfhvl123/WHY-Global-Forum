@@ -81,6 +81,7 @@ header.nav{
 #scene.dragging{cursor:grabbing}
 .hero-ui{position:absolute;inset:0;pointer-events:none;display:flex;flex-direction:column;justify-content:flex-end;padding:var(--pad);z-index:10}
 .hero-title{
+  /* the hero title is the top of the type scale: every other heading stays below it at all widths */
   font-size:clamp(35px,3.8vw,80px);
   font-weight:700;letter-spacing:-.02em;line-height:1.06;
   text-transform:uppercase;
@@ -117,13 +118,13 @@ header.nav{
 /* ---------- section shell ---------- */
 section{padding-block:clamp(64px,9vw,140px)}
 .statement{
-  font-size:clamp(26px,4.4vw,62px);font-weight:600;letter-spacing:-.035em;line-height:1.06;
+  font-size:clamp(24px,2.7vw,52px);font-weight:600;letter-spacing:-.035em;line-height:1.06;
   max-width:19ch;
 }
 .statement em{font-style:normal;color:var(--ink-30)}
 /* About opener: one oversized question, a mid-size answer, then the small body */
-.ask{font-size:clamp(40px,7.6vw,132px);font-weight:700;letter-spacing:-.045em;line-height:.98}
-.ask-mid{font-size:clamp(22px,2.8vw,40px);font-weight:600;letter-spacing:-.03em;line-height:1.15;margin-top:clamp(18px,2.4vw,32px)}
+.ask{font-size:clamp(28px,3vw,60px);font-weight:700;letter-spacing:-.045em;line-height:.98}
+.ask-mid{font-size:clamp(19px,1.9vw,32px);font-weight:600;letter-spacing:-.03em;line-height:1.15;margin-top:clamp(18px,2.4vw,32px)}
 .statement-sub{
   font-size:clamp(15px,1.5vw,19px);line-height:1.55;color:var(--ink-60);
   max-width:56ch;margin-top:20px;
@@ -135,7 +136,7 @@ section{padding-block:clamp(64px,9vw,140px)}
   display:flex;flex-direction:column;gap:14px;
 }
 .bigline p{
-  font-size:clamp(32px,6vw,104px);font-weight:700;letter-spacing:-.045em;line-height:.98;
+  font-size:clamp(28px,3vw,60px);font-weight:700;letter-spacing:-.045em;line-height:.98;
 }
 .bigline p i{font-style:normal;color:var(--accent)}
 .bigline .sub{font-size:14px;color:var(--ink-60);max-width:46ch;line-height:1.55}
@@ -255,7 +256,7 @@ section{padding-block:clamp(64px,9vw,140px)}
 
 /* ---------- cta ---------- */
 .cta{background:var(--ink);color:var(--bg);border-radius:clamp(14px,2vw,26px);padding:clamp(34px,6vw,86px) var(--pad);margin-inline:var(--pad);position:relative;overflow:hidden}
-.cta h3{font-size:clamp(30px,6.4vw,88px);font-weight:600;letter-spacing:-.04em;line-height:.98;max-width:14ch}
+.cta h3{font-size:clamp(28px,3vw,60px);font-weight:600;letter-spacing:-.04em;line-height:.98;max-width:14ch}
 .cta .row{display:flex;justify-content:space-between;align-items:flex-end;gap:26px;margin-top:34px;flex-wrap:wrap}
 .cta p{font-size:14px;opacity:.6;max-width:34ch;line-height:1.55}
 .btn{
