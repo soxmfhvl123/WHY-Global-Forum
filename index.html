@@ -183,6 +183,7 @@ section{padding-block:clamp(64px,9vw,140px)}
   padding:52px 0 26px;
 }
 .plgroup:last-of-type{border-bottom:1px solid var(--line)}
+#partners > .holo{margin-top:clamp(32px,4.5vw,64px)}
 .plgroup h3{
   position:absolute;top:18px;left:0;
   font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
@@ -322,6 +323,10 @@ footer{padding:56px var(--pad) 30px}
   mix-blend-mode:soft-light;
   animation:holo-glint 7s cubic-bezier(.45,0,.25,1) infinite;
 }
+/* label over the veiled list: rides along at mid-screen while the list scrolls past */
+.veil-wrap{position:relative}
+.veil-note{position:absolute;inset:0;z-index:3;pointer-events:none;display:flex;flex-direction:column;align-items:center}
+.veil-note .pill{position:sticky;top:calc(50% - 22px);margin-block:clamp(90px,14vw,180px);font-size:clamp(14px,1.2vw,17px);padding:.8em 1.4em}
 @keyframes holo-drift{from{background-position:0 0,0 0}to{background-position:0 0,300% 0}}
 @keyframes holo-glint{from{background-position:150% 0}to{background-position:-50% 0}}
 
@@ -399,10 +404,9 @@ footer{padding:56px var(--pad) 30px}
 <!-- ================= SPEAKERS ================= -->
 <section id="speakers" class="wrap">
 
-  <div class="speaker-list veiled holo" id="speakerList" aria-hidden="true"></div>
-
-  <div style="margin-top:26px" class="rv">
-    <a href="#" class="pill ghost" data-en="Full lineup to be announced →" data-ko="전체 라인업 추후 공개 →">Full lineup to be announced →</a>
+  <div class="veil-wrap">
+    <div class="speaker-list veiled holo" id="speakerList" aria-hidden="true"></div>
+    <div class="veil-note"><span class="pill" data-en="Full lineup to be announced" data-ko="전체 라인업 추후 공개">Full lineup to be announced</span></div>
   </div>
 </section>
 
@@ -445,11 +449,6 @@ footer{padding:56px var(--pad) 30px}
       data-ko="파트너들은 디자인 중심의 관점을 공유하며, 의미 있는 변화를 향해 함께 나아가는 협력자입니다.">
       Our partners are committed collaborators.
   </h2>
-  <p class="statement-sub rv"
-     data-en="Their participation stands as a shared belief in the power of inquiry, discussion and creative action."
-     data-ko="이들의 참여는 질문과 토론, 그리고 창조적 실천의 힘에 대한 공동의 믿음을 보여줍니다.">
-     Their participation stands as a shared belief in the power of inquiry.
-  </p>
 
   <!-- one sheen across all groups so it flows over the dividers too -->
   <div class="holo" aria-hidden="true">
