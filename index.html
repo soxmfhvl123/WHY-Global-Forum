@@ -288,26 +288,44 @@ footer{padding:56px var(--pad) 30px}
    behind a blur and a slow holographic sheen so it can't be read */
 .veiled{position:relative;pointer-events:none;user-select:none;-webkit-user-select:none}
 .veiled > *{filter:blur(9px) saturate(.8);opacity:.8}
-.veiled::after{
-  content:"";position:absolute;inset:-6px;pointer-events:none;
-  background:linear-gradient(90deg,
-    rgba(248,206,69,.28),rgba(242,103,34,.24),rgba(232,72,31,.24),
-    rgba(242,103,34,.24),rgba(248,206,69,.28));
-  background-size:300% 100%;mix-blend-mode:multiply;
-  /* feather all four edges so the sheen fades out instead of ending on a hard box */
+
+/* holographic sheen laid over veiled content, in the key-visual oranges.
+   ::after is the slow colour drift, ::before a soft light glint sweeping across.
+   Both feather out at the edges instead of ending on a hard box. */
+.holo{position:relative}
+.holo::before,.holo::after{
+  content:"";position:absolute;inset:-6px;pointer-events:none;z-index:2;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 64px,#000 calc(100% - 64px),transparent),
                      linear-gradient(180deg,transparent,#000 40px,#000 calc(100% - 40px),transparent);
   -webkit-mask-composite:source-in;
   mask-image:linear-gradient(90deg,transparent,#000 64px,#000 calc(100% - 64px),transparent),
              linear-gradient(180deg,transparent,#000 40px,#000 calc(100% - 40px),transparent);
   mask-composite:intersect;
-  animation:holo 9s linear infinite;
 }
-/* keep the group's hairlines crisp: the sheen sits inside them */
-.plgroup.veiled::after{inset:10px 0}
-@keyframes holo{to{background-position:300% 0}}
+.holo::after{
+  /* fine grain dithers the low-contrast gradient so it doesn't band into visible steps */
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .14 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    linear-gradient(90deg,
+      rgba(248,206,69,.30) 0%,rgba(255,150,70,.26) 12.5%,rgba(242,103,34,.26) 25%,
+      rgba(255,120,110,.24) 37.5%,rgba(232,72,31,.26) 50%,rgba(255,120,110,.24) 62.5%,
+      rgba(242,103,34,.26) 75%,rgba(255,150,70,.26) 87.5%,rgba(248,206,69,.30) 100%);
+  background-size:160px 160px,300% 100%;
+  mix-blend-mode:multiply;
+  animation:holo-drift 14s linear infinite;
+}
+.holo::before{
+  background:linear-gradient(105deg,
+    transparent 30%,rgba(255,236,200,.0) 36%,rgba(255,236,200,.55) 46%,
+    rgba(255,255,255,.75) 50%,rgba(255,236,200,.55) 54%,rgba(255,236,200,0) 64%,transparent 70%);
+  background-size:250% 100%;background-position:150% 0;
+  mix-blend-mode:soft-light;
+  animation:holo-glint 7s cubic-bezier(.45,0,.25,1) infinite;
+}
+@keyframes holo-drift{from{background-position:0 0,0 0}to{background-position:0 0,300% 0}}
+@keyframes holo-glint{from{background-position:150% 0}to{background-position:-50% 0}}
 
-@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}.veiled::after{animation:none}}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}.holo::before,.holo::after{animation:none}}
 </style>
 </head>
 <body>
@@ -381,7 +399,7 @@ footer{padding:56px var(--pad) 30px}
 <!-- ================= SPEAKERS ================= -->
 <section id="speakers" class="wrap">
 
-  <div class="speaker-list veiled" id="speakerList" aria-hidden="true"></div>
+  <div class="speaker-list veiled holo" id="speakerList" aria-hidden="true"></div>
 
   <div style="margin-top:26px" class="rv">
     <a href="#" class="pill ghost" data-en="Full lineup to be announced →" data-ko="전체 라인업 추후 공개 →">Full lineup to be announced →</a>
@@ -433,24 +451,27 @@ footer{padding:56px var(--pad) 30px}
      Their participation stands as a shared belief in the power of inquiry.
   </p>
 
-  <div class="plgroup rv veiled" aria-hidden="true">
+  <!-- one sheen across all groups so it flows over the dividers too -->
+  <div class="holo" aria-hidden="true">
+  <div class="plgroup rv veiled">
     <h3 data-en="Hosted by" data-ko="주최">Hosted by</h3>
     <div class="plogos" data-logos="kfda:KFDA|seoul-metropolitan-government:Seoul Metropolitan Government"></div>
   </div>
 
-  <div class="plgroup rv veiled" aria-hidden="true">
+  <div class="plgroup rv veiled">
     <h3 data-en="Organized by" data-ko="주관">Organized by</h3>
     <div class="plogos" data-logos="why:WHY|seoul-metropolitan-government:Seoul Metropolitan Government|seoul-design-foundation:Seoul Design Foundation"></div>
   </div>
 
-  <div class="plgroup rv veiled" aria-hidden="true">
+  <div class="plgroup rv veiled">
     <h3 data-en="Sponsored by" data-ko="후원">Sponsored by</h3>
     <div class="plogos" data-logos="genesis:Genesis|duobo:DUOBO by LG Labs"></div>
   </div>
 
-  <div class="plgroup rv veiled" aria-hidden="true">
+  <div class="plgroup rv veiled">
     <h3 data-en="Featuring contributions from" data-ko="기여">Featuring contributions from</h3>
     <div class="plogos" data-logos="undp:UNDP|clab:CLAB|hongik-university:Hongik University|hongik-idas:Hongik IDAS"></div>
+  </div>
   </div>
 </section>
 
